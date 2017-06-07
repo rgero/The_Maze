@@ -54,12 +54,17 @@ public class BlockManager : MonoBehaviour {
 		}
 
 		//Time to create walls...
+		GameObject wallHolder = new GameObject();
+		wallHolder.name = "Wall Container";
+
+
 		GameObject leftWall = Instantiate(gameBlockPrefab) as GameObject;
 		leftWall.transform.position = new Vector3 (-blockWidth, blockHeight, blockLength * (boardLength / 2) - blockLength/2);
 		Vector3 leftLocalScale = GameConstants.BLOCK_SCALE;
 		leftLocalScale.z = boardLength * blockLength;
 		leftWall.transform.localScale = leftLocalScale;
 		leftWall.name = "Left Wall";
+		leftWall.transform.parent = wallHolder.transform;
 
 		GameObject rightWall = Instantiate(gameBlockPrefab) as GameObject;
 		rightWall.transform.position = new Vector3 (boardWidth*blockWidth, blockHeight, blockLength * (boardLength / 2) - blockLength/2);
@@ -67,6 +72,7 @@ public class BlockManager : MonoBehaviour {
 		rightWallScale.z = boardLength * blockLength;
 		rightWall.transform.localScale = rightWallScale;
 		rightWall.name = "Right Wall";
+		rightWall.transform.parent = wallHolder.transform;
 
 		GameObject topWall = Instantiate(gameBlockPrefab) as GameObject;
 		topWall.transform.position = new Vector3 (blockWidth * (boardWidth / 2) - blockWidth/2, blockHeight, -blockLength);
@@ -74,6 +80,7 @@ public class BlockManager : MonoBehaviour {
 		topLS.x = boardWidth * blockWidth;
 		topWall.transform.localScale = topLS;
 		topWall.name = "Top Wall";
+		topWall.transform.parent = wallHolder.transform;
 
 		GameObject bottomWall = Instantiate(gameBlockPrefab) as GameObject;
 		bottomWall.transform.position = new Vector3 (blockWidth * (boardWidth / 2) - blockWidth/2, blockHeight, boardLength*blockLength);
@@ -81,6 +88,7 @@ public class BlockManager : MonoBehaviour {
 		bottomLS.x = boardWidth * blockWidth;
 		bottomWall.transform.localScale = bottomLS;
 		bottomWall.name = "Bottom Wall";
+		bottomWall.transform.parent = wallHolder.transform;
 
 		//Creating the start block
 		int startBlockNum = Random.Range(0, listOfBlocks.Count);

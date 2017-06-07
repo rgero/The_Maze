@@ -16,11 +16,7 @@ public class EndBlock : MonoBehaviour {
 
 		GameObject pointLight = Instantiate (lightPrefab) as GameObject;
 		pointLight.transform.localPosition = targetPos;
+		pointLight.transform.parent = this.transform;
 	}
 
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
