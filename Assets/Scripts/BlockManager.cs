@@ -5,6 +5,7 @@ using UnityEngine;
 public class BlockManager : MonoBehaviour {
 
 	public GameObject gameBlockPrefab;
+	public GameObject startBlockPrefab;
 	public int boardWidth;
 	public int boardLength;
 	public int numberOfBlocksToggled;
@@ -79,6 +80,16 @@ public class BlockManager : MonoBehaviour {
 		bottomLS.x = boardWidth * blockWidth;
 		bottomWall.transform.localScale = bottomLS;
 		bottomWall.name = "Bottom Wall";
+
+		//Getting the start block
+		int startBlockNum = Random.Range(0, listOfBlocks.Count);
+		GameObject startBlock = Instantiate(startBlockPrefab) as GameObject;
+		GameObject oldBlock = listOfBlocks [startBlockNum];
+		startBlock.transform.position = oldBlock.transform.position;
+		startBlock.name = "StartingBlock";
+		startBlock.transform.parent = blockHolder.transform;
+		listOfBlocks.RemoveAt (startBlockNum);
+		Destroy (oldBlock);
 
 
 		toggleBlocks ();

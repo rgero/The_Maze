@@ -13,11 +13,17 @@ public class Block : MonoBehaviour {
 	private float currentHeight;
 	private Vector3 currentPos;
 
+	bool audioPlaying;
+	public AudioSource audioClip;
+
 	void Awake () {
 		isUp = false; // Start in the down position
 		shouldMove = false;
-		move_speed = 0.5f;
+		move_speed = 0.1f;
 		blockHeight = this.gameObject.transform.localScale.y;
+
+		audioPlaying = false;
+		audioClip = this.GetComponent<AudioSource> ();
 	}
 
 	/* 	What does this function need to do?
@@ -33,8 +39,11 @@ public class Block : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		currentPos = this.gameObject.transform.localPosition;
-		if (shouldMove) 
-		{
+		if (shouldMove) {
+			if (!audioPlaying) {
+				audioClip.Play ();
+				audioPlaying = true;
+			}
 			moveBlock ();
 			if (!isUp && currentPos.y > blockHeight) {
 				shouldMove = false;
@@ -48,6 +57,11 @@ public class Block : MonoBehaviour {
 				isUp = false;
 				currentPos.y = 0;
 				this.gameObject.transform.position = currentPos;
+			}
+		} else {
+			if (audioPlaying) {
+				audioClip.Stop ();
+				audioPlaying = false;
 			}
 		}
 	}
