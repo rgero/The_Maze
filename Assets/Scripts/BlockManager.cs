@@ -6,6 +6,7 @@ public class BlockManager : MonoBehaviour {
 
 	public GameObject gameBlockPrefab;
 	public GameObject startBlockPrefab;
+	public GameObject endBlockPrefab;
 	public int boardWidth;
 	public int boardLength;
 	public int numberOfBlocksToggled;
@@ -81,7 +82,7 @@ public class BlockManager : MonoBehaviour {
 		bottomWall.transform.localScale = bottomLS;
 		bottomWall.name = "Bottom Wall";
 
-		//Getting the start block
+		//Creating the start block
 		int startBlockNum = Random.Range(0, listOfBlocks.Count);
 		GameObject startBlock = Instantiate(startBlockPrefab) as GameObject;
 		GameObject oldBlock = listOfBlocks [startBlockNum];
@@ -89,6 +90,16 @@ public class BlockManager : MonoBehaviour {
 		startBlock.name = "StartingBlock";
 		startBlock.transform.parent = blockHolder.transform;
 		listOfBlocks.RemoveAt (startBlockNum);
+		Destroy (oldBlock);
+
+		//Creating the Ending Block
+		int endBlockNum = Random.Range(0, listOfBlocks.Count);
+		GameObject endBlock = Instantiate(endBlockPrefab) as GameObject;
+		oldBlock = listOfBlocks [endBlockNum];
+		endBlock.transform.position = oldBlock.transform.position;
+		endBlock.name = "EndingBlock";
+		endBlock.transform.parent = blockHolder.transform;
+		listOfBlocks.RemoveAt (endBlockNum);
 		Destroy (oldBlock);
 
 

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StartBlock : MonoBehaviour {
+public class EndBlock : MonoBehaviour {
 
-	public GameObject playerPrefab;
 	public GameObject lightPrefab;
 
 	// Use this for initialization
@@ -12,14 +11,13 @@ public class StartBlock : MonoBehaviour {
 
 		Vector3 currentBlockPos = this.transform.position;
 
-		GameObject player = Instantiate (playerPrefab) as GameObject;
 		Vector3 targetPos = currentBlockPos;
 		targetPos.y += 5;
-		player.transform.localPosition = targetPos;
 
 		GameObject pointLight = Instantiate (lightPrefab) as GameObject;
 		pointLight.transform.localPosition = targetPos;
 	}
+
 	
 	// Update is called once per frame
 	void Update () {

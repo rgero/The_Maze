@@ -46,13 +46,11 @@ public class Block : MonoBehaviour {
 			moveBlock ();
 			if (!isUp && currentPos.y > blockHeight) {
 				shouldMove = false;
-				canMove = false;
 				isUp = true;
 				currentPos.y = blockHeight;
 				this.gameObject.transform.position = currentPos;
 			} else if (isUp && currentPos.y < 0) {
 				shouldMove = false;
-				canMove = false;
 				isUp = false;
 				currentPos.y = 0;
 				this.gameObject.transform.position = currentPos;
