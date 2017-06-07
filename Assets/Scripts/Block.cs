@@ -5,7 +5,6 @@ using UnityEngine;
 public class Block : MonoBehaviour {
 
 	bool isUp;
-	bool canMove;
 	public bool shouldMove;
 	public float move_speed;
 
