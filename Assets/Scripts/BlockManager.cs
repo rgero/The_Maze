@@ -16,6 +16,9 @@ public class BlockManager : MonoBehaviour {
 	float blockLength;
 	float blockHeight;
 	Random rand;
+	int MinBlocks = GameConstants.MINIMUM_MOVEMENTS;
+	int MaxBlocks = GameConstants.MAXIMUM_MOVEMENTS;
+	int startMoveBlocks = 50;
 
 	bool shiftBlocks;
 	float cool_down_timer = 0.0f;
@@ -111,10 +114,10 @@ public class BlockManager : MonoBehaviour {
 		Destroy (oldBlock);
 
 
-		toggleBlocks ();
+		toggleBlocks (startMoveBlocks);
 	}
 
-	void toggleBlocks()
+	void toggleBlocks(int numberOfBlocks)
 	{
 		for (int k = 0; k < numberOfBlocksToggled; k++) {
 			int blockNumber = Random.Range (0, listOfBlocks.Count);
@@ -132,7 +135,8 @@ public class BlockManager : MonoBehaviour {
 				shiftBlocks = true;
 			}
 		} else {
-			toggleBlocks ();
+			int targetBlocks = Random.Range (MinBlocks, MaxBlocks);
+			toggleBlocks (targetBlocks);
 			shiftBlocks = false;
 		}
 		
