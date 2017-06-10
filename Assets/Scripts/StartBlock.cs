@@ -11,12 +11,12 @@ public class StartBlock : MonoBehaviour {
 	void Start () {
 
 		Vector3 currentBlockPos = this.transform.position;
-
-		GameObject player = Instantiate (playerPrefab) as GameObject;
 		Vector3 targetPos = currentBlockPos;
+
+		/*GameObject player = Instantiate (playerPrefab) as GameObject;
 		targetPos.y += 5;
 		player.transform.localPosition = targetPos;
-		player.name = "Player";
+		player.name = "Player";*/
 
 		GameObject pointLight = Instantiate (lightPrefab) as GameObject;
 		pointLight.transform.localPosition = targetPos;

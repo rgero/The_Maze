@@ -9,5 +9,7 @@ public class GameConstants : MonoBehaviour {
 	public static int MINIMUM_MOVEMENTS = 10;
 	public static int MAXIMUM_MOVEMENTS = 100;
 
+	public static float MOVEMENT_SPEED = 1.0f;
+
 
 }
