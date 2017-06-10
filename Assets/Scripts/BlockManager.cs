@@ -64,7 +64,7 @@ public class BlockManager : MonoBehaviour {
 		GameObject leftWall = Instantiate(gameBlockPrefab) as GameObject;
 		leftWall.transform.position = new Vector3 (-blockWidth, blockHeight, blockLength * (boardLength / 2) - blockLength/2);
 		Vector3 leftLocalScale = GameConstants.BLOCK_SCALE;
-		leftLocalScale.z = boardLength * blockLength;
+		leftLocalScale.z = (boardLength+2) * blockLength;
 		leftWall.transform.localScale = leftLocalScale;
 		leftWall.name = "Left Wall";
 		leftWall.transform.parent = wallHolder.transform;
@@ -72,7 +72,7 @@ public class BlockManager : MonoBehaviour {
 		GameObject rightWall = Instantiate(gameBlockPrefab) as GameObject;
 		rightWall.transform.position = new Vector3 (boardWidth*blockWidth, blockHeight, blockLength * (boardLength / 2) - blockLength/2);
 		Vector3 rightWallScale = GameConstants.BLOCK_SCALE;
-		rightWallScale.z = boardLength * blockLength;
+		rightWallScale.z = (boardLength+2) * blockLength;
 		rightWall.transform.localScale = rightWallScale;
 		rightWall.name = "Right Wall";
 		rightWall.transform.parent = wallHolder.transform;
