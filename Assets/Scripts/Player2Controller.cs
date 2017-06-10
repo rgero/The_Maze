@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player2Controller : MonoBehaviour {
 
@@ -11,6 +12,11 @@ public class Player2Controller : MonoBehaviour {
 	public Transform cameraTransform;
 	public MouseLook mouseLook;
 	public Vector2 movementDirection;
+	public GameObject movesLeftGO;
+	Text movesLeftText;
+	int moves;
+	float coolDown;
+	float elapsedTime;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +24,12 @@ public class Player2Controller : MonoBehaviour {
 		gameTransform = this.gameObject.transform;
 		cameraTransform = player2Camera.transform;
 		mouseLook.Init (this.transform, player2Camera.transform);
+
+		moves = GameConstants.MOVES_BEFORE_COOLDOWN;
+		coolDown = GameConstants.COOLDOWN_VALUE;
+		elapsedTime = 0;
+		movesLeftText = movesLeftGO.GetComponent<Text> ();
+		updateMovesText ();
 	}
 	
 	// Update is called once per frame
@@ -45,12 +57,27 @@ public class Player2Controller : MonoBehaviour {
 		}
 		this.transform.position = currentPos;
 
-		if (CrossPlatformInputManager.GetButtonDown ("Fire1")) {
+		if (CrossPlatformInputManager.GetButtonDown ("Fire1") && moves > 0) {
 			GameObject hit = DetectHit ();
 			if (hit) {
 				hit.GetComponent<Block> ().shouldMove = true;
+				moves -= 1;
+				updateMovesText ();
 			}
 		}
+
+		elapsedTime += Time.deltaTime;
+		if (elapsedTime > coolDown) {
+			elapsedTime = 0;
+			if (moves <= GameConstants.MOVES_BEFORE_COOLDOWN) {
+				moves += 1;
+				updateMovesText ();
+			}
+		}
+	}
+
+	void updateMovesText(){
+		movesLeftText.text = string.Format ("Moves Left: {0}", moves);
 	}
 
 	GameObject DetectHit(){
