@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BlockManager : MonoBehaviour {
 
+	public bool player2Enabled;
 	public GameObject gameBlockPrefab;
 	public GameObject startBlockPrefab;
 	public GameObject endBlockPrefab;
@@ -128,16 +129,18 @@ public class BlockManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!shiftBlocks) {
-			cool_down_timer += Time.deltaTime;
-			if (cool_down_timer > GameConstants.COOLDOWN_VALUE) {
-				cool_down_timer = 0;
-				shiftBlocks = true;
+		if (!player2Enabled) {
+			if (!shiftBlocks) {
+				cool_down_timer += Time.deltaTime;
+				if (cool_down_timer > GameConstants.COOLDOWN_VALUE) {
+					cool_down_timer = 0;
+					shiftBlocks = true;
+				}
+			} else {
+				int targetBlocks = Random.Range (MinBlocks, MaxBlocks);
+				toggleBlocks (targetBlocks);
+				shiftBlocks = false;
 			}
-		} else {
-			int targetBlocks = Random.Range (MinBlocks, MaxBlocks);
-			toggleBlocks (targetBlocks);
-			shiftBlocks = false;
 		}
 		
 	}
