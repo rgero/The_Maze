@@ -45,6 +45,21 @@ public class Player2Controller : MonoBehaviour {
 		}
 		this.transform.position = currentPos;
 
+		if (CrossPlatformInputManager.GetButtonDown ("Fire1")) {
+			GameObject hit = DetectHit ();
+			if (hit) {
+				hit.GetComponent<Block> ().shouldMove = true;
+			}
+		}
+	}
+
+	GameObject DetectHit(){
+		RaycastHit hit;
+		if (Physics.Raycast (player2Camera.transform.position, player2Camera.transform.forward, out hit)) {
+			return hit.transform.gameObject;
+		} else {
+			return null;
+		}
 	}
 
 	private void RotateView()
