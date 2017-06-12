@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StartBlock : MonoBehaviour {
 
-	public GameObject playerPrefab;
+	public GameObject player;
 	public GameObject lightPrefab;
 
 	// Use this for initialization
@@ -13,10 +13,9 @@ public class StartBlock : MonoBehaviour {
 		Vector3 currentBlockPos = this.transform.position;
 		Vector3 targetPos = currentBlockPos;
 
-		GameObject player = Instantiate (playerPrefab) as GameObject;
+		player = GameObject.Find("Player");
 		targetPos.y += 5;
 		player.transform.localPosition = targetPos;
-		player.name = "Player";
 
 		GameObject pointLight = Instantiate (lightPrefab) as GameObject;
 		pointLight.transform.localPosition = targetPos;

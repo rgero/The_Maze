@@ -13,10 +13,12 @@ public class DistanceCalculator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		beacon = GameObject.Find ("Beacon");
 		distanceText = GameObject.Find ("DistanceFromEnd").GetComponent<Text>();
+		distanceText.text = "";
+	}
 
-		beaconPosition = beacon.transform.position;
+	public void setBeacon(GameObject g){
+		this.beacon = g;
 	}
 
 	double calculateDistance(){
@@ -26,7 +28,9 @@ public class DistanceCalculator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		double currentDistance = calculateDistance ();
-		distanceText.text = String.Format ("{0} {1:0.00}", distancePrefix, currentDistance);
+		if (beacon != null) {
+			double currentDistance = calculateDistance ();
+			distanceText.text = String.Format ("{0} {1:0.00}", distancePrefix, currentDistance);
+		}
 	}
 }
