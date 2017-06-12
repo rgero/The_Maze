@@ -47,11 +47,11 @@ public class Player2Controller : MonoBehaviour {
 		this.transform.position = currentPos;
 
 		//Moving Up and Down (increasing/decreasing altitude)
-		if (Input.GetKey(KeyCode.E))
+		if (Input.GetKey(KeyCode.Space))
 		{
 			currentPos.y += GameConstants.MOVEMENT_SPEED;
 		}
-		if (Input.GetKey(KeyCode.Q))
+		if (Input.GetKey(KeyCode.LeftShift))
 		{
 			currentPos.y -= GameConstants.MOVEMENT_SPEED;
 		}
@@ -69,7 +69,7 @@ public class Player2Controller : MonoBehaviour {
 		elapsedTime += Time.deltaTime;
 		if (elapsedTime > coolDown) {
 			elapsedTime = 0;
-			if (moves <= GameConstants.MOVES_BEFORE_COOLDOWN) {
+			if (moves < GameConstants.MOVES_BEFORE_COOLDOWN) {
 				moves += 1;
 				updateMovesText ();
 			}
