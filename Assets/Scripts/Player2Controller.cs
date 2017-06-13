@@ -4,6 +4,7 @@ using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine;
 using UnityEngine.UI;
+using XboxCtrlrInput;
 
 public class Player2Controller : MonoBehaviour {
 
@@ -13,6 +14,8 @@ public class Player2Controller : MonoBehaviour {
 	public MouseLook mouseLook;
 	public Vector2 movementDirection;
 	public GameObject movesLeftGO;
+	XboxController player2Controller;
+	bool usingXbox;
 	Text movesLeftText;
 	int moves;
 	float coolDown;
@@ -20,6 +23,8 @@ public class Player2Controller : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		player2Controller = XboxController.Second;
+		usingXbox = GameConstants.p2UsingXbox;
 		player2Camera = gameObject.GetComponentInChildren<Camera> ();
 		gameTransform = this.gameObject.transform;
 		cameraTransform = player2Camera.transform;
@@ -38,8 +43,15 @@ public class Player2Controller : MonoBehaviour {
 		// This section is pretty much taken from the FirstPersonController script provided by standard asset.
 		// Just trimmed the fat a bit.
 		RotateView();
-		float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
-		float vertical = CrossPlatformInputManager.GetAxis("Vertical");
+		float horizontal, vertical;
+		if (usingXbox) {
+			horizontal = XCI.GetAxis (XboxAxis.LeftStickX, player2Controller);
+			vertical = XCI.GetAxis (XboxAxis.LeftStickY, player2Controller);
+		} else {
+			// Read input
+			horizontal = CrossPlatformInputManager.GetAxis ("Horizontal");
+			vertical = CrossPlatformInputManager.GetAxis ("Vertical");
+		}
 		movementDirection = new Vector2 (horizontal, vertical);
 		Vector3 desiredMove = transform.forward*movementDirection.y + transform.right*movementDirection.x;
 		Vector3 currentPos = this.transform.position;
@@ -47,6 +59,19 @@ public class Player2Controller : MonoBehaviour {
 		this.transform.position = currentPos;
 
 		//Moving Up and Down (increasing/decreasing altitude)
+		if (usingXbox) {
+			if (XCI.GetButton(XboxButton.RightBumper, player2Controller))
+			{
+				currentPos.y += GameConstants.MOVEMENT_SPEED;
+			}
+			if (XCI.GetButton(XboxButton.LeftBumper, player2Controller))
+			{
+				currentPos.y -= GameConstants.MOVEMENT_SPEED;
+			}
+
+		}
+
+
 		if (Input.GetKey(KeyCode.Space))
 		{
 			currentPos.y += GameConstants.MOVEMENT_SPEED;
@@ -91,6 +116,6 @@ public class Player2Controller : MonoBehaviour {
 
 	private void RotateView()
 	{
-		mouseLook.LookRotation (this.gameObject.transform, player2Camera.transform);
+		mouseLook.LookRotation (this.gameObject.transform, player2Camera.transform, usingXbox, player2Controller);
 	}
 }

@@ -13,5 +13,6 @@ public class GameConstants : MonoBehaviour {
 	public static float MOVEMENT_SPEED = 1.0f;
 
 	public static bool usingXbox = true;
+	public static bool p2UsingXbox = true;
 
 }
