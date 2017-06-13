@@ -20,7 +20,7 @@ public class LightControl : MonoBehaviour {
 	void Update () {
 		if (GameConstants.usingXbox && XCI.GetButtonDown(XboxButton.Y, XboxController.First)){
 			toggleLight();
-		} else if (CrossPlatformInputManager.GetButtonDown ("Fire1")) {
+		} else if (!GameConstants.usingXbox && CrossPlatformInputManager.GetButtonDown ("Fire1")) {
 			toggleLight ();
 		}
 		

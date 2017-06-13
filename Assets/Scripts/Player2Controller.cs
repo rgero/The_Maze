@@ -82,13 +82,10 @@ public class Player2Controller : MonoBehaviour {
 		}
 		this.transform.position = currentPos;
 
-		if (CrossPlatformInputManager.GetButtonDown ("Fire1") && moves > 0) {
-			GameObject hit = DetectHit ();
-			if (hit) {
-				hit.GetComponent<Block> ().shouldMove = true;
-				moves -= 1;
-				updateMovesText ();
-			}
+		if (GameConstants.usingXbox && XCI.GetButtonDown(XboxButton.Y, player2Controller) && moves > 0){
+			processRaycast();
+		} else if (!GameConstants.usingXbox && CrossPlatformInputManager.GetButtonDown ("Fire1") && moves > 0) {
+			processRaycast();
 		}
 
 		elapsedTime += Time.deltaTime;
@@ -98,6 +95,15 @@ public class Player2Controller : MonoBehaviour {
 				moves += 1;
 				updateMovesText ();
 			}
+		}
+	}
+
+	void processRaycast(){
+		GameObject hit = DetectHit ();
+		if (hit) {
+			hit.GetComponent<Block> ().shouldMove = true;
+			moves -= 1;
+			updateMovesText ();
 		}
 	}
 
