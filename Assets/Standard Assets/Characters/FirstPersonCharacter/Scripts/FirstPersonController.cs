@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using XboxCtrlrInput;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
@@ -41,10 +42,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
+		private bool usingXbox;
+		private XboxController playerController;
 
         // Use this for initialization
         private void Start()
         {
+			usingXbox = true;
+			playerController = XboxController.First;
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
@@ -65,7 +70,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
-                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+				if (usingXbox) {
+					m_Jump = XCI.GetButtonDown (XboxButton.A, playerController);
+				} else {
+					m_Jump = CrossPlatformInputManager.GetButtonDown ("Jump");
+				}
             }
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
@@ -203,16 +212,26 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void GetInput(out float speed)
         {
-            // Read input
-            float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
-            float vertical = CrossPlatformInputManager.GetAxis("Vertical");
+			float horizontal, vertical;
+			if (usingXbox) {
+				horizontal = XCI.GetAxis (XboxAxis.LeftStickX, playerController);
+				vertical = XCI.GetAxis (XboxAxis.LeftStickY, playerController);
+			} else {
+				// Read input
+				horizontal = CrossPlatformInputManager.GetAxis ("Horizontal");
+				vertical = CrossPlatformInputManager.GetAxis ("Vertical");
+			}
 
             bool waswalking = m_IsWalking;
 
 #if !MOBILE_INPUT
             // On standalone builds, walk/run speed is modified by a key press.
             // keep track of whether or not the character is walking or running
-            m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
+			if (usingXbox){
+				m_IsWalking = !XCI.GetButton(XboxButton.LeftStick, playerController);
+			} else {
+            	m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
+			}
 #endif
             // set the desired speed to be walking or running
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
@@ -236,7 +255,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            m_MouseLook.LookRotation (transform, m_Camera.transform);
+            m_MouseLook.LookRotation (transform, m_Camera.transform, usingXbox, playerController);
         }
 
 
@@ -255,5 +274,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
+
+		public void setController(XboxController newCont){
+			playerController = newCont;
+		}
     }
 }

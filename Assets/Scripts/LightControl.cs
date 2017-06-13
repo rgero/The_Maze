@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XboxCtrlrInput;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class LightControl : MonoBehaviour {
@@ -17,8 +18,9 @@ public class LightControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		if (CrossPlatformInputManager.GetButtonDown ("Fire1")) {
+		if (GameConstants.usingXbox && XCI.GetButtonDown(XboxButton.Y, XboxController.First)){
+			toggleLight();
+		} else if (CrossPlatformInputManager.GetButtonDown ("Fire1")) {
 			toggleLight ();
 		}
 		
