@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: Combine this with the LightControl script.
+
 public class LightScript : MonoBehaviour {
-	
+
 	public GameObject characterObject;
 	Camera playerCamera;
 	Vector3 flashlightHeight;
@@ -15,7 +17,7 @@ public class LightScript : MonoBehaviour {
 		playerCamera = characterObject.GetComponent<Camera> ();
 		handOffset = characterObject.transform.localPosition.y / 2;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		flashlightHeight = playerCamera.transform.position;

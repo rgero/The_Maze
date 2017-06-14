@@ -36,10 +36,10 @@ public class Player2Controller : MonoBehaviour {
 		movesLeftText = movesLeftGO.GetComponent<Text> ();
 		updateMovesText ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		
+
 		// This section is pretty much taken from the FirstPersonController script provided by standard asset.
 		// Just trimmed the fat a bit.
 		RotateView();
@@ -69,17 +69,16 @@ public class Player2Controller : MonoBehaviour {
 				currentPos.y -= GameConstants.MOVEMENT_SPEED;
 			}
 
-		}
-
-
-		if (Input.GetKey(KeyCode.Space))
-		{
-			currentPos.y += GameConstants.MOVEMENT_SPEED;
-		}
-		if (Input.GetKey(KeyCode.LeftShift))
-		{
-			currentPos.y -= GameConstants.MOVEMENT_SPEED;
-		}
+		} else {
+  		if (Input.GetKey(KeyCode.Space))
+  		{
+  			currentPos.y += GameConstants.MOVEMENT_SPEED;
+  		}
+  		if (Input.GetKey(KeyCode.LeftShift))
+  		{
+  			currentPos.y -= GameConstants.MOVEMENT_SPEED;
+  		}
+    }
 		this.transform.position = currentPos;
 
 		if (GameConstants.usingXbox && XCI.GetButtonDown(XboxButton.Y, player2Controller) && moves > 0){
@@ -110,6 +109,7 @@ public class Player2Controller : MonoBehaviour {
 	void updateMovesText(){
 		movesLeftText.text = string.Format ("Moves Left: {0}", moves);
 	}
+
 
 	GameObject DetectHit(){
 		RaycastHit hit;

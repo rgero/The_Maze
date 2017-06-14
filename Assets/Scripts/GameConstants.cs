@@ -12,6 +12,7 @@ public class GameConstants : MonoBehaviour {
 
 	public static float MOVEMENT_SPEED = 1.0f;
 
+  // These might not actually be Constants, in which case I should find a better place to store them.
 	public static bool usingXbox = true;
 	public static bool p2UsingXbox = true;
 

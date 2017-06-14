@@ -5,7 +5,7 @@ using UnityEngine;
 public class Block : MonoBehaviour {
 
 	bool isUp;
-	public bool shouldMove;
+	bool shouldMove;
 	public float move_speed;
 
 	private float blockHeight;
@@ -25,8 +25,7 @@ public class Block : MonoBehaviour {
 		audioClip = this.GetComponent<AudioSource> ();
 	}
 
-	/* 	What does this function need to do?
-	 * 		1.) It needs to move the block up or down it's entire height.
+	/* 	This function moves the block up/down one block length
 	 */
 	void moveBlock()
 	{
@@ -35,11 +34,10 @@ public class Block : MonoBehaviour {
 		this.gameObject.transform.position = currentPos;
 	}
 
-	// Update is called once per frame
 	void Update () {
 		currentPos = this.gameObject.transform.localPosition;
 		if (shouldMove) {
-			if (!audioPlaying) {
+			if (!audioPlaying) { //Checks to see if the audio is playing and plays it.
 				audioClip.Play ();
 				audioPlaying = true;
 			}
@@ -57,6 +55,8 @@ public class Block : MonoBehaviour {
 			}
 		} else {
 			if (audioPlaying) {
+        // The audio clip is longer than the time it takes the block to move.
+        // This allows me to stop it when the block stops moving.
 				audioClip.Stop ();
 				audioPlaying = false;
 			}

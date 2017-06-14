@@ -17,6 +17,9 @@ public class DistanceCalculator : MonoBehaviour {
 		distanceText.text = "";
 	}
 
+  // The Beacon is a component of the End Block.
+  // To prevent a race condition, I am exposing this function.
+  // When the end block is instantiated, it looks for this class and sets the beacon.
 	public void setBeacon(GameObject g){
 		this.beacon = g;
 		beaconPosition = g.transform.position;
@@ -26,7 +29,7 @@ public class DistanceCalculator : MonoBehaviour {
 		return Mathf.Round (Vector3.Distance (this.transform.position, beaconPosition) * 100) / 100;
 	}
 
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (beacon != null) {

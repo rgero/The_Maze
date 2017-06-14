@@ -29,7 +29,8 @@ public class BlockManager : MonoBehaviour {
 		shiftBlocks = false; // We want the cooldown to be started immediately.
 
 		listOfBlocks = new List<GameObject> ();
-		
+
+    //I could leave this as the Vector3, but I feel this is clearer
 		blockWidth = GameConstants.BLOCK_SCALE.x;
 		blockLength = GameConstants.BLOCK_SCALE.z;
 		blockHeight = GameConstants.BLOCK_SCALE.y;
@@ -37,6 +38,7 @@ public class BlockManager : MonoBehaviour {
 		GameObject blockHolder = new GameObject ();
 		blockHolder.name = "Block Holder";
 
+    //Instantiate all of the blocks.
 		for (int i = 0; i < boardWidth; i++) {
 			for (int j = 0; j < boardLength; j++) {
 				Vector3 blockPosition = new Vector3 (i * blockWidth, 0, j * blockLength);
@@ -60,7 +62,6 @@ public class BlockManager : MonoBehaviour {
 		//Time to create walls...
 		GameObject wallHolder = new GameObject();
 		wallHolder.name = "Wall Container";
-
 
 		GameObject leftWall = Instantiate(gameBlockPrefab) as GameObject;
 		leftWall.transform.position = new Vector3 (-blockWidth, blockHeight, blockLength * (boardLength / 2) - blockLength/2);
@@ -114,10 +115,11 @@ public class BlockManager : MonoBehaviour {
 		listOfBlocks.RemoveAt (endBlockNum);
 		Destroy (oldBlock);
 
-
+    // This toggles the block initially so the game can start immediately.
 		toggleBlocks (startMoveBlocks);
 	}
 
+  // Using Unity's random object, I randomly determine which blocks should move.
 	void toggleBlocks(int numberOfBlocks)
 	{
 		for (int k = 0; k < numberOfBlocksToggled; k++) {
@@ -126,9 +128,11 @@ public class BlockManager : MonoBehaviour {
 			targetBlock.GetComponent<Block> ().triggerMovement ();
 		}
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
+    //Checks to see if the second player is playing.
+    //For now I do not want the block manager to move any blocks. Playtesting might change this.
 		if (!player2Enabled) {
 			if (!shiftBlocks) {
 				cool_down_timer += Time.deltaTime;
@@ -142,6 +146,6 @@ public class BlockManager : MonoBehaviour {
 				shiftBlocks = false;
 			}
 		}
-		
+
 	}
 }
