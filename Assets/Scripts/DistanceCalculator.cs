@@ -19,6 +19,7 @@ public class DistanceCalculator : MonoBehaviour {
 
 	public void setBeacon(GameObject g){
 		this.beacon = g;
+		beaconPosition = g.transform.position;
 	}
 
 	double calculateDistance(){
