@@ -100,7 +100,7 @@ public class Player2Controller : MonoBehaviour {
 	void processRaycast(){
 		GameObject hit = DetectHit ();
 		if (hit) {
-			hit.GetComponent<Block> ().shouldMove = true;
+			hit.GetComponent<Block> ().triggerMovement();
 			moves -= 1;
 			updateMovesText ();
 		}
