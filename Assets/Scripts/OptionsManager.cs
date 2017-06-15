@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using XboxCtrlrInput;
 
 public class OptionsManager : MonoBehaviour {
 
@@ -30,7 +31,25 @@ public class OptionsManager : MonoBehaviour {
 		int p1Control = playerOneDropdown.value;
 		int p2Control = playerTwoDropdown.value;
 
-		PlayerPrefs.SetInt ("P1_Controller_Scheme", p1Control);
-		PlayerPrefs.SetInt ("P2_Controller_Scheme", p2Control);
+		bool status = true; // True means Ok.
+		string err_msg = "";
+		//Check the controllers.
+		if (p1Control == 1 && !XCI.IsPluggedIn((int)XboxController.First))
+		{
+			status = false;
+			err_msg += "Controller for Player 1 is unplugged.\n";
+		}
+		if (p2Control == 1 && !XCI.IsPluggedIn ((int)XboxController.Second)) {
+			status = false;
+			err_msg += "Controller for Player 2 is unplugged.\n";
+		}
+
+		if (status) {
+			PlayerPrefs.SetInt ("P1_Controller_Scheme", p1Control);
+			PlayerPrefs.SetInt ("P2_Controller_Scheme", p2Control);
+		} else {
+			Debug.Log (err_msg);
+		}
+			
 	}
 }
