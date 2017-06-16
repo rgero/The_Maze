@@ -23,8 +23,16 @@ public class Player2Controller : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		player2Controller = XboxController.Second;
-		usingXbox = GameConstants.p2UsingXbox;
+		if (PlayerPrefs.GetInt ("P2_Controller_Scheme") == 0) {
+			usingXbox = false;
+		} else {
+			usingXbox = true;
+			if (PlayerPrefs.GetInt ("P1_Controller_Scheme") == 0) {
+				player2Controller = XboxController.First;
+			} else {
+				player2Controller = XboxController.Second;
+			}
+		}
 		player2Camera = gameObject.GetComponentInChildren<Camera> ();
 		gameTransform = this.gameObject.transform;
 		cameraTransform = player2Camera.transform;
@@ -43,6 +51,7 @@ public class Player2Controller : MonoBehaviour {
 		// This section is pretty much taken from the FirstPersonController script provided by standard asset.
 		// Just trimmed the fat a bit.
 		RotateView();
+		Debug.Log (player2Controller);
 		float horizontal, vertical;
 		if (usingXbox) {
 			horizontal = XCI.GetAxis (XboxAxis.LeftStickX, player2Controller);
@@ -81,9 +90,9 @@ public class Player2Controller : MonoBehaviour {
     }
 		this.transform.position = currentPos;
 
-		if (GameConstants.usingXbox && XCI.GetButtonDown(XboxButton.Y, player2Controller) && moves > 0){
+		if (usingXbox && XCI.GetButtonDown(XboxButton.Y, player2Controller) && moves > 0){
 			processRaycast();
-		} else if (!GameConstants.usingXbox && CrossPlatformInputManager.GetButtonDown ("Fire1") && moves > 0) {
+		} else if (!usingXbox && CrossPlatformInputManager.GetButtonDown ("Fire1") && moves > 0) {
 			processRaycast();
 		}
 

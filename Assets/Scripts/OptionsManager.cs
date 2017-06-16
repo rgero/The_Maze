@@ -37,15 +37,11 @@ public class OptionsManager : MonoBehaviour {
 		string err_msg = "";
 		errorText.text = err_msg;
 
-		//Check the controllers.
-		if (p1Control == 1 && !XCI.IsPluggedIn((int)XboxController.First))
-		{
+		int totalNumberRequired = p1Control + p2Control;
+		int totalNumberHad = XCI.GetNumPluggedCtrlrs ();
+		if (totalNumberRequired > totalNumberHad) {
 			status = false;
-			err_msg += "Controller for Player 1 is unplugged.\n";
-		}
-		if (p2Control == 1 && !XCI.IsPluggedIn ((int)XboxController.Second)) {
-			status = false;
-			err_msg += "Controller for Player 2 is unplugged.\n";
+			err_msg += "Check Controllers.";
 		}
 
 		if (status) {

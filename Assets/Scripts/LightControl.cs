@@ -11,17 +11,25 @@ public class LightControl : MonoBehaviour {
 
 	GameObject light;
 	AudioSource audioSource;
+	bool usingXbox;
+	XboxController playerController;
 	public AudioClip flashlightSound;
 
 	void Start () {
 		light = GetComponentInChildren<Light> ().gameObject;
 		audioSource = GetComponent<AudioSource> ();
+		if (PlayerPrefs.GetInt ("P1_Controller_Scheme") == 0) {
+			usingXbox = false;
+		} else {
+			usingXbox = true;
+			playerController = XboxController.First;
+		}
 	}
 
 	void Update () {
-		if (GameConstants.usingXbox && XCI.GetButtonDown(XboxButton.Y, XboxController.First)){
+		if (usingXbox && XCI.GetButtonDown(XboxButton.Y, playerController)){
 			toggleLight();
-		} else if (!GameConstants.usingXbox && CrossPlatformInputManager.GetButtonDown ("Fire1")) {
+		} else if (!usingXbox && CrossPlatformInputManager.GetButtonDown ("Fire1")) {
 			toggleLight ();
 		}
 

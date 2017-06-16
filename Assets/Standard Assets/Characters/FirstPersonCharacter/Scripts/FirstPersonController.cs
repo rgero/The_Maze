@@ -48,8 +48,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Use this for initialization
         private void Start()
         {
-			usingXbox = true;
-			playerController = XboxController.First;
+			if (PlayerPrefs.GetInt ("P1_Controller_Scheme") == 0) {
+				usingXbox = false;
+			} else {
+				usingXbox = true;
+				playerController = XboxController.First;
+			}
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
