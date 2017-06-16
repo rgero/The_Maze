@@ -8,11 +8,13 @@ public class OptionsManager : MonoBehaviour {
 
 	Dropdown playerOneDropdown;
 	Dropdown playerTwoDropdown;
+	Text errorText;
 
 	// Use this for initialization
 	void Start () {
 		GameObject playerOneOptions = GameObject.Find ("P1_Dropdown");
 		GameObject playerTwoOptions = GameObject.Find ("P2_Dropdown");
+		errorText = GameObject.Find ("ErrorText").GetComponent<Text> ();
 
 		playerOneDropdown = playerOneOptions.GetComponent<Dropdown> ();
 		playerTwoDropdown = playerTwoOptions.GetComponent<Dropdown> ();
@@ -33,6 +35,8 @@ public class OptionsManager : MonoBehaviour {
 
 		bool status = true; // True means Ok.
 		string err_msg = "";
+		errorText.text = err_msg;
+
 		//Check the controllers.
 		if (p1Control == 1 && !XCI.IsPluggedIn((int)XboxController.First))
 		{
@@ -47,8 +51,11 @@ public class OptionsManager : MonoBehaviour {
 		if (status) {
 			PlayerPrefs.SetInt ("P1_Controller_Scheme", p1Control);
 			PlayerPrefs.SetInt ("P2_Controller_Scheme", p2Control);
+
+			LevelManager levelManger = GameObject.Find ("LevelManager").GetComponent<LevelManager> ();
+			levelManger.LoadLevel ("StartMenu");
 		} else {
-			Debug.Log (err_msg);
+			errorText.text = err_msg;
 		}
 			
 	}
