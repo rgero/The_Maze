@@ -51,7 +51,6 @@ public class Player2Controller : MonoBehaviour {
 		// This section is pretty much taken from the FirstPersonController script provided by standard asset.
 		// Just trimmed the fat a bit.
 		RotateView();
-		Debug.Log (player2Controller);
 		float horizontal, vertical;
 		if (usingXbox) {
 			horizontal = XCI.GetAxis (XboxAxis.LeftStickX, player2Controller);
