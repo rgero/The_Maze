@@ -8,12 +8,12 @@ using XboxCtrlrInput;
 
 public class Player2Controller : MonoBehaviour {
 
-	public Camera player2Camera;
-	public Transform gameTransform;
-	public Transform cameraTransform;
-	public MouseLook mouseLook;
-	public Vector2 movementDirection;
-	public GameObject movesLeftGO;
+	Camera player2Camera;
+	Transform gameTransform;
+	Transform cameraTransform;
+	MouseLook mouseLook;
+	Vector2 movementDirection;
+	GameObject movesLeftGO;
 	XboxController player2Controller;
 	bool usingXbox;
 	Text movesLeftText;
