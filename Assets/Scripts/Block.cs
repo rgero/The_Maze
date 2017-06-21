@@ -6,21 +6,18 @@ public class Block : MonoBehaviour {
 
 	bool isUp;
 	bool shouldMove;
-	public float move_speed;
-
-	private float blockHeight;
-	private float currentHeight;
-	private Vector3 currentPos;
-
+	float move_speed;
+	float blockHeight;
+	float currentHeight;
+	Vector3 currentPos;
 	bool audioPlaying;
-	public AudioSource audioClip;
+	AudioSource audioClip;
 
 	void Awake () {
 		isUp = false; // Start in the down position
 		shouldMove = false;
-		move_speed = 0.1f;
+		move_speed = GameConstants.BLOCK_MOVE_SPEED;
 		blockHeight = this.gameObject.transform.localScale.y;
-
 		audioPlaying = false;
 		audioClip = this.GetComponent<AudioSource> ();
 	}

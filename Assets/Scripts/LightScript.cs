@@ -8,7 +8,7 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class LightScript : MonoBehaviour {
 
-	public GameObject characterObject;
+	GameObject characterObject;
 	Camera playerCamera;
 	Vector3 flashlightHeight;
 	float handOffset; // I don't want the light to appear eye level.

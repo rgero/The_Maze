@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class DistanceCalculator : MonoBehaviour {
 
-	public GameObject beacon;
+	GameObject beacon;
 	Vector3 beaconPosition;
-	public Text distanceText;
+	Text distanceText;
 	string distancePrefix = "Distance To End: ";
 
 	// Use this for initialization
