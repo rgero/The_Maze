@@ -70,7 +70,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
-			if (usingXbox && XCI.GetNumPluggedCtrlrs () < 1) {
+			if (usingXbox && !XCI.IsPluggedIn((int)playerController)) {
 				usingXbox = false;
 			}
 

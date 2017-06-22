@@ -48,6 +48,10 @@ public class Player2Controller : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if(usingXbox && !XCI.IsPluggedIn( (int)player2Controller ) ) {
+			usingXbox = false;
+		}
+
 		// This section is pretty much taken from the FirstPersonController script provided by standard asset.
 		// Just trimmed the fat a bit.
 		RotateView();
