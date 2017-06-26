@@ -7,7 +7,7 @@ public class Block : MonoBehaviour {
 	bool isUp;
 	bool shouldMove;
 	float move_speed;
-	float blockHeight;
+	public float blockHeight;
 	float currentHeight;
 	Vector3 currentPos;
 	bool audioPlaying;
@@ -17,7 +17,7 @@ public class Block : MonoBehaviour {
 		isUp = false; // Start in the down position
 		shouldMove = false;
 		move_speed = GameConstants.BLOCK_MOVE_SPEED;
-		blockHeight = this.gameObject.transform.localScale.y;
+		blockHeight = this.gameObject.transform.lossyScale.y;
 		audioPlaying = false;
 		audioClip = this.GetComponent<AudioSource> ();
 	}
