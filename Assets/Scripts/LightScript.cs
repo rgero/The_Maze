@@ -14,7 +14,7 @@ public class LightScript : MonoBehaviour {
 	float handOffset; // I don't want the light to appear eye level.
 
 	//From Light Control.
-	Light light;
+	Light flashLightObj;
 	AudioSource audioSource;
 	bool usingXbox;
 	XboxController playerController;
@@ -26,7 +26,7 @@ public class LightScript : MonoBehaviour {
 		playerCamera = characterObject.GetComponent<Camera> ();
 		handOffset = characterObject.transform.localPosition.y / 2;
 
-		light = this.GetComponent<Light> ();
+		flashLightObj = this.GetComponent<Light> ();
 		audioSource = this.transform.parent.gameObject.GetComponent<AudioSource> ();
 		if (PlayerPrefs.GetInt ("P1_Controller_Scheme") == 0) {
 			usingXbox = false;
@@ -56,7 +56,7 @@ public class LightScript : MonoBehaviour {
 	// For now this doesn't do anything but inconvenience the first player
 	// I might make it so it "hides" the player from the second player.
 	void toggleLight(){
-		light.enabled = !light.enabled;
+		flashLightObj.enabled = !flashLightObj.enabled;
 		audioSource.PlayOneShot (flashlightSound);
 	}
 }

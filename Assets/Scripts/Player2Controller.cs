@@ -9,8 +9,6 @@ using XboxCtrlrInput;
 public class Player2Controller : MonoBehaviour {
 
 	Camera player2Camera;
-	Transform gameTransform;
-	Transform cameraTransform;
 	MouseLook mouseLook;
 	Vector2 movementDirection;
 	GameObject movesLeftGO;
@@ -34,8 +32,6 @@ public class Player2Controller : MonoBehaviour {
 			}
 		}
 		player2Camera = gameObject.GetComponentInChildren<Camera> ();
-		gameTransform = this.gameObject.transform;
-		cameraTransform = player2Camera.transform;
 		mouseLook.Init (this.transform, player2Camera.transform);
 
 		moves = GameConstants.MOVES_BEFORE_COOLDOWN;

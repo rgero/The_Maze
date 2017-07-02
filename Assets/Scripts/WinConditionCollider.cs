@@ -13,8 +13,7 @@ public class WinConditionCollider : MonoBehaviour {
 		GameObject collidedObject = collider.gameObject;
 		if (collidedObject.name == "Player" && !winTriggered) {
 			winTriggered = true;
-			GameObject winning = Instantiate (winPrefab) as GameObject;
-			Text winningText = GameObject.Find ("WinnerText").GetComponent<Text> ();
+			Instantiate (winPrefab);
 		}
 	}
 }

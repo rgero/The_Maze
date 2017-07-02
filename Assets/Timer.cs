@@ -32,7 +32,7 @@ public class Timer : MonoBehaviour {
 
 			if (!presentMessage) {
 				presentMessage = true;
-				GameObject gameOver = Instantiate (EndGameTextPrefab) as GameObject;
+				Instantiate (EndGameTextPrefab);
 				Text winnerText = GameObject.Find ("WinnerText").GetComponent<Text> ();
 				winnerText.text = "Player 1 loses";
 			}
