@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour {
 
@@ -34,7 +35,12 @@ public class Timer : MonoBehaviour {
 				presentMessage = true;
 				Instantiate (EndGameTextPrefab);
 				Text winnerText = GameObject.Find ("WinnerText").GetComponent<Text> ();
-				winnerText.text = "Player 1 loses";
+
+				Scene currentScene = SceneManager.GetActiveScene ();
+				Debug.Log (currentScene.name);
+				if (currentScene.name.Equals ("SplitScreen")) {
+					winnerText.text = "Player 2\nwins!";
+				}
 			}
 		}
 		
