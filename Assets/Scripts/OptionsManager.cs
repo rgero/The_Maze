@@ -12,6 +12,7 @@ public class OptionsManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Cursor.visible = true;
 		GameObject playerOneOptions = GameObject.Find ("P1_Dropdown");
 		GameObject playerTwoOptions = GameObject.Find ("P2_Dropdown");
 		errorText = GameObject.Find ("ErrorText").GetComponent<Text> ();
