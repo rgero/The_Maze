@@ -37,9 +37,10 @@ public class Timer : MonoBehaviour {
 				Text winnerText = GameObject.Find ("WinnerText").GetComponent<Text> ();
 
 				Scene currentScene = SceneManager.GetActiveScene ();
-				Debug.Log (currentScene.name);
 				if (currentScene.name.Equals ("SplitScreen")) {
 					winnerText.text = "Player 2\nwins!";
+				} else {
+					winnerText.text = "Player 1\nloses!";
 				}
 			}
 		}
