@@ -7,6 +7,8 @@ public class GameConstants : MonoBehaviour {
 	public static float COOLDOWN_VALUE = 5.0f;
 	public static int MOVES_BEFORE_COOLDOWN = 5;
 	public static Vector3 BLOCK_SCALE = new Vector3 (10, 10, 10);
+	public static float ITEM_WEIGHT = 0.05f;
+	public static int MAX_ITEMS = 5;
 	public static int MINIMUM_MOVEMENTS = 10;
 	public static int MAXIMUM_MOVEMENTS = 100;
 

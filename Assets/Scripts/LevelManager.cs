@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	void Update(){
-		if (Input.GetKeyDown (KeyCode.Escape)) {
+		if (Input.GetKeyDown (KeyCode.F6)) {
 			LoadLevel ("StartMenu");
 		}
 	}

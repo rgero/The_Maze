@@ -24,6 +24,8 @@ public class BlockManager : MonoBehaviour {
 	bool shiftBlocks;
 	float cool_down_timer = 0.0f;
 
+	int itemCount = 0;
+
 	// Use this for initialization
 	void Start () {
 		shiftBlocks = false; // We want the cooldown to be started immediately.
@@ -144,6 +146,17 @@ public class BlockManager : MonoBehaviour {
 				int targetBlocks = Random.Range (MinBlocks, MaxBlocks);
 				toggleBlocks (targetBlocks);
 				shiftBlocks = false;
+			}
+		}
+
+		// Spawn Items
+		if (itemCount < GameConstants.MAX_ITEMS) {
+			float randomWeight = Random.value;
+			if (randomWeight <= GameConstants.ITEM_WEIGHT) {
+				itemCount += 1;
+				int blockNumber = Random.Range (0, listOfBlocks.Count);
+				GameObject targetBlock = listOfBlocks [blockNumber];
+				targetBlock.transform.Find ("ItemHolder").GetComponent<ItemSpawner> ().spawnItem ();
 			}
 		}
 
