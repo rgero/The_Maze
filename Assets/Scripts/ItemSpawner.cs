@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour {
 
-	public GameObject testObjectPrefab;
+	public List<GameObject> potentialObjects;
 
 	public void spawnItem(){
 		Transform parent = this.gameObject.transform.parent;
 		Debug.Log (parent.gameObject.name);
 
-		GameObject gameObject = Instantiate (testObjectPrefab) as GameObject;
+		int chosenItem = Random.Range (0, potentialObjects.Count);
+		GameObject spawnItem = potentialObjects [chosenItem];
+
+		GameObject gameObject = Instantiate (spawnItem) as GameObject;
 		gameObject.transform.parent = this.transform;
 		gameObject.transform.position = this.transform.position;
 	}
