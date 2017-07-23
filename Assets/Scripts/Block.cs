@@ -12,6 +12,8 @@ public class Block : MonoBehaviour {
 	Vector3 currentPos;
 	bool audioPlaying;
 	AudioSource audioClip;
+	ItemSpawner itemSpawner;
+	GameObject heldItem;
 
 	void Awake () {
 		isUp = false; // Start in the down position
@@ -20,6 +22,8 @@ public class Block : MonoBehaviour {
 		blockHeight = this.gameObject.transform.lossyScale.y;
 		audioPlaying = false;
 		audioClip = this.GetComponent<AudioSource> ();
+		itemSpawner = this.GetComponent<ItemSpawner> ();
+		heldItem = null;
 	}
 
 	/* 	This function moves the block up/down one block length
@@ -29,6 +33,9 @@ public class Block : MonoBehaviour {
 		int direction = isUp ? -1 : 1; // The direction is going down if the block "isUp" and vise versa.
 		currentPos.y += (direction * move_speed);
 		this.gameObject.transform.position = currentPos;
+		if (heldItem) {
+			heldItem.transform.localPosition = GameConstants.ITEM_POS_OFFSET;
+		}
 	}
 
 	void Update () {
@@ -64,4 +71,10 @@ public class Block : MonoBehaviour {
 	{
 		shouldMove = true;
 	}
+
+	public void spawnItem(){
+		heldItem = itemSpawner.spawnItem ();
+	
+	}
+
 }

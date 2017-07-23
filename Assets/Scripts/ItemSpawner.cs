@@ -6,7 +6,7 @@ public class ItemSpawner : MonoBehaviour {
 
 	public List<GameObject> potentialObjects;
 
-	public void spawnItem(){
+	public GameObject spawnItem(){
 		Transform parent = this.gameObject.transform.parent;
 		Debug.Log (parent.gameObject.name);
 
@@ -15,6 +15,8 @@ public class ItemSpawner : MonoBehaviour {
 
 		GameObject gameObject = Instantiate (spawnItem) as GameObject;
 		gameObject.transform.parent = this.transform;
-		gameObject.transform.position = this.transform.position;
+		gameObject.transform.localPosition = GameConstants.ITEM_POS_OFFSET;
+
+		return gameObject;
 	}
 }

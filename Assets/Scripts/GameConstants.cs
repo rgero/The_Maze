@@ -8,7 +8,7 @@ public class GameConstants : MonoBehaviour {
 	public static int MOVES_BEFORE_COOLDOWN = 5;
 	public static Vector3 BLOCK_SCALE = new Vector3 (10, 10, 10);
 	public static float ITEM_WEIGHT = 0.05f;
-	public static int MAX_ITEMS = 5;
+	public static int MAX_ITEMS = 1;
 	public static int MINIMUM_MOVEMENTS = 10;
 	public static int MAXIMUM_MOVEMENTS = 100;
 
@@ -21,5 +21,7 @@ public class GameConstants : MonoBehaviour {
   // These might not actually be Constants, in which case I should find a better place to store them.
 	public static bool usingXbox = true;
 	public static bool p2UsingXbox = true;
+
+	public static Vector3 ITEM_POS_OFFSET = new Vector3(0,0.7f,0);
 
 }

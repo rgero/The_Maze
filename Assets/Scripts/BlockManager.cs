@@ -156,7 +156,7 @@ public class BlockManager : MonoBehaviour {
 				itemCount += 1;
 				int blockNumber = Random.Range (0, listOfBlocks.Count);
 				GameObject targetBlock = listOfBlocks [blockNumber];
-				targetBlock.transform.Find ("ItemHolder").GetComponent<ItemSpawner> ().spawnItem ();
+				targetBlock.GetComponent<Block> ().spawnItem ();
 			}
 		}
 
