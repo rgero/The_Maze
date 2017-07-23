@@ -15,7 +15,6 @@ public class ItemSpawner : MonoBehaviour {
 
 		GameObject gameObject = Instantiate (spawnItem) as GameObject;
 		gameObject.transform.parent = this.transform;
-		gameObject.transform.localPosition = GameConstants.ITEM_POS_OFFSET;
 
 		return gameObject;
 	}

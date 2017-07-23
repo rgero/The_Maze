@@ -22,6 +22,9 @@ public class GameConstants : MonoBehaviour {
 	public static bool usingXbox = true;
 	public static bool p2UsingXbox = true;
 
-	public static Vector3 ITEM_POS_OFFSET = new Vector3(0,0.7f,0);
+	public static float ITEM_POS_OFFSET = 0.7f;
+	public static float ITEM_ROT_SPEED = 1.0f;
+	public static float ITEM_BOB_Y = 0.05f;
+	public static float ITEM_BOB_SPEED = 0.001f;
 
 }

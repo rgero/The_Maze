@@ -33,9 +33,6 @@ public class Block : MonoBehaviour {
 		int direction = isUp ? -1 : 1; // The direction is going down if the block "isUp" and vise versa.
 		currentPos.y += (direction * move_speed);
 		this.gameObject.transform.position = currentPos;
-		if (heldItem) {
-			heldItem.transform.localPosition = GameConstants.ITEM_POS_OFFSET;
-		}
 	}
 
 	void Update () {
