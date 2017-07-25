@@ -49,4 +49,13 @@ public class Item : MonoBehaviour {
 		this.transform.Rotate (new Vector3(0, rotationSpeed, 0));
 
 	}
+
+	void OnTriggerEnter(Collider collider){
+		GameObject collidedObject = collider.gameObject;
+		if (collidedObject.name == "Player") {
+			// Give player effect
+			this.parentBlock.GetComponent<Block>().removeItem();
+			Destroy(this.gameObject);
+		}
+	}
 }

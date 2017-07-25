@@ -70,8 +70,13 @@ public class Block : MonoBehaviour {
 	}
 
 	public void spawnItem(){
-		heldItem = itemSpawner.spawnItem ();
-	
+		if (heldItem == null) {
+			heldItem = itemSpawner.spawnItem ();
+		}
+	}
+
+	public void removeItem(){
+		heldItem = null;
 	}
 
 }
