@@ -287,5 +287,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public void setController(XboxController newCont){
 			playerController = newCont;
 		}
+
+		public void setWalkSpeed(float newSpeed){
+			this.m_WalkSpeed = newSpeed;
+		}
+
+		public void setRunSpeed(float newSpeed){
+			this.m_RunSpeed = newSpeed;
+		}
+
+		public float getRunSpeed(){
+			return m_RunSpeed;
+		}
+
+		public float getWalkSpeed(){
+			return m_WalkSpeed;
+		}
     }
 }

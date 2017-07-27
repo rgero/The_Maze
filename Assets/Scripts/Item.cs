@@ -55,6 +55,7 @@ public class Item : MonoBehaviour {
 		if (collidedObject.name == "Player") {
 			// Give player effect
 			this.parentBlock.GetComponent<Block>().removeItem();
+			collidedObject.GetComponent<EffectManager> ().addEffect (this.name, 10.0f);
 			Destroy(this.gameObject);
 		}
 	}
