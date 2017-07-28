@@ -8,13 +8,13 @@ public class ItemSpawner : MonoBehaviour {
 
 	public GameObject spawnItem(){
 		Transform parent = this.gameObject.transform.parent;
-		Debug.Log (parent.gameObject.name);
 
 		int chosenItem = Random.Range (0, potentialObjects.Count);
 		GameObject spawnItem = potentialObjects [chosenItem];
 
 		GameObject gameObject = Instantiate (spawnItem) as GameObject;
 		gameObject.transform.parent = this.transform;
+		gameObject.name = spawnItem.name;
 
 		return gameObject;
 	}
