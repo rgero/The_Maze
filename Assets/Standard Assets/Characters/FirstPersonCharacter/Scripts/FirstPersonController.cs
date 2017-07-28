@@ -303,5 +303,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public float getWalkSpeed(){
 			return m_WalkSpeed;
 		}
+
+		public void setJumpSpeed(float newSpeed){
+			this.m_JumpSpeed = newSpeed;
+		}
     }
 }

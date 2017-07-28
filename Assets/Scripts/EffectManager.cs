@@ -30,7 +30,7 @@ public class EffectManager : MonoBehaviour {
 					removeEffect (i);
 				}
 			}
-
+			Debug.Log (listOfEffects.Count);
 		}
 
 	}
@@ -44,6 +44,19 @@ public class EffectManager : MonoBehaviour {
 			fpsController.setRunSpeed (fpsController.getRunSpeed () - 10);
 			fpsController.setWalkSpeed (fpsController.getWalkSpeed () - 10);
 		}
+		if (e.name.Equals ("jumpBoost")) {
+			fpsController.setJumpSpeed (10.0f);
+		}
+	}
+
+	int searchForEffect(string effectName)
+	{
+		for (int i = 0; i < listOfEffects.Count; i++) {
+			if (listOfEffects [i].name.Equals (effectName)) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	public void addEffect(string effect, float time){
@@ -51,13 +64,30 @@ public class EffectManager : MonoBehaviour {
 		newEffect.name = effect;
 		newEffect.duration = time;
 
-		listOfEffects.Add (newEffect);
+		bool addToEffects = true;
 
 		//Activate Effect
 		if (effect.Equals ("speedBoost")) {
 			fpsController.setRunSpeed (fpsController.getRunSpeed () + 10);
 			fpsController.setWalkSpeed (fpsController.getWalkSpeed () + 10);
 		}
-	
+
+		//Jump Boost
+		if (effect.Equals ("jumpBoost")) {
+			int foundEffect = searchForEffect ("jumpBoost");
+			if (foundEffect != -1) {
+				Effect found = listOfEffects [foundEffect];
+				found.duration += time;
+				listOfEffects [foundEffect] = found;
+				addToEffects = false;
+			} else {
+				fpsController.setJumpSpeed (15.0f);
+
+			}
+		}
+
+		if (addToEffects) {
+			listOfEffects.Add (newEffect);
+		}
 	}
 }
