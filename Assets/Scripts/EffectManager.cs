@@ -27,9 +27,7 @@ public class EffectManager : MonoBehaviour {
 				listOfEffects [i] = e;
 				if (e.duration < 0) {
 					Debug.Log ("Removing " + e.name);
-					listOfEffects.RemoveAt (i);
-				} else {
-					Debug.Log (e.name + " : " + e.duration.ToString ());
+					removeEffect (i);
 				}
 			}
 
@@ -37,11 +35,22 @@ public class EffectManager : MonoBehaviour {
 
 	}
 
+	public void removeEffect(int i){
+		Effect e = listOfEffects[i];
+		listOfEffects.RemoveAt (i);
+
+		if (e.name.Equals("speedBoost"))
+		{
+			fpsController.setRunSpeed (fpsController.getRunSpeed () - 10);
+			fpsController.setWalkSpeed (fpsController.getWalkSpeed () - 10);
+		}
+	}
+
 	public void addEffect(string effect, float time){
 		Effect newEffect;
 		newEffect.name = effect;
 		newEffect.duration = time;
-		Debug.Log ("Added: " + newEffect.name);
+
 		listOfEffects.Add (newEffect);
 
 		//Activate Effect
