@@ -64,29 +64,24 @@ public class EffectManager : MonoBehaviour {
 		newEffect.name = effect;
 		newEffect.duration = time;
 
-		bool addToEffects = true;
-
-		//Activate Effect
-		if (effect.Equals ("speedBoost")) {
-			fpsController.setRunSpeed (fpsController.getRunSpeed () + 10);
-			fpsController.setWalkSpeed (fpsController.getWalkSpeed () + 10);
-		}
-
-		//Jump Boost
-		if (effect.Equals ("jumpBoost")) {
-			int foundEffect = searchForEffect ("jumpBoost");
-			if (foundEffect != -1) {
-				Effect found = listOfEffects [foundEffect];
-				found.duration += time;
-				listOfEffects [foundEffect] = found;
-				addToEffects = false;
-			} else {
-				fpsController.setJumpSpeed (15.0f);
-
+		/**
+		 * Steps:
+		 * 	1.) Search for the effect, if it exists, add to the duration
+		 * 	2.) If it does not exist, make the changes and add the effect.
+		 */
+		int foundEffect = searchForEffect (effect);
+		if (foundEffect != -1) {
+			Effect found = listOfEffects [foundEffect];
+			found.duration += time;
+			listOfEffects [foundEffect] = found;
+		} else {
+			if (effect.Equals ("speedBoost")) {
+				fpsController.setRunSpeed (fpsController.getRunSpeed () + 10);
+				fpsController.setWalkSpeed (fpsController.getWalkSpeed () + 10);
 			}
-		}
-
-		if (addToEffects) {
+			if (effect.Equals ("jumpBoost")) {
+				fpsController.setJumpSpeed (15.0f);
+			}
 			listOfEffects.Add (newEffect);
 		}
 	}
