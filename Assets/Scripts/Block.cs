@@ -69,12 +69,18 @@ public class Block : MonoBehaviour {
 		shouldMove = true;
 	}
 
+	/**
+	 * Spawns an item on the block.
+	 */
 	public void spawnItem(){
 		if (heldItem == null) {
 			heldItem = itemSpawner.spawnItem ();
 		}
 	}
 
+	/***
+	 * Remove the item from the block. This is mostly used when the player hits the blocks.
+	 */
 	public void removeItem(){
 		heldItem = null;
 	}

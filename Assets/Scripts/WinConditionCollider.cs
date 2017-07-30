@@ -8,7 +8,6 @@ public class WinConditionCollider : MonoBehaviour {
 	public GameObject winPrefab;
 	bool winTriggered = false;
 
-
 	void OnTriggerEnter(Collider collider){
 		GameObject collidedObject = collider.gameObject;
 		if (collidedObject.name == "Player" && !winTriggered) {
