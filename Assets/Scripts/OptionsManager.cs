@@ -38,9 +38,9 @@ public class OptionsManager : MonoBehaviour {
 		string err_msg = "";
 		errorText.text = err_msg;
 
-		int totalNumberRequired = p1Control + p2Control;
-		int totalNumberHad = XCI.GetNumPluggedCtrlrs ();
-		if (totalNumberRequired > totalNumberHad) {
+		int numberOfControllersNeeded = p1Control + p2Control; // This is total number of controllers.
+		int totalNumberPluggedIn = XCI.GetNumPluggedCtrlrs ();
+		if (numberOfControllersNeeded > totalNumberPluggedIn) {
 			status = false;
 			err_msg += "Check Controllers.";
 		}
