@@ -4,6 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using XboxCtrlrInput;
 
+public struct PlayerOption {
+	public GameObject playerText;
+	public Dropdown playerDropdown;
+
+	public PlayerOption(GameObject p, Dropdown d)
+	{
+		this.playerText = p;
+		this.playerDropdown = d;
+	}
+}
+
 public class OptionsManager : MonoBehaviour {
 
 	Dropdown playerSelector;
@@ -12,7 +23,7 @@ public class OptionsManager : MonoBehaviour {
 	int numberOfPlayers;
 	int p1Control;
 	int p2Control;
-	List<Dropdown> listOfDrops;
+	List<PlayerOption> listOfDrops;
 	Text errorText;
 
 	// Use this for initialization
@@ -27,9 +38,14 @@ public class OptionsManager : MonoBehaviour {
 		playerOneDropdown = playerOneOptions.GetComponent<Dropdown> ();
 		playerTwoDropdown = playerTwoOptions.GetComponent<Dropdown> ();
 
-		listOfDrops = new List<Dropdown> ();
-		listOfDrops.Add (playerOneDropdown);
-		listOfDrops.Add (playerTwoDropdown);
+		GameObject playerOneText = GameObject.Find ("P1_Text");
+		GameObject playerTwoText = GameObject.Find ("P2_Text");
+
+
+
+		listOfDrops = new List<PlayerOption> ();
+		listOfDrops.Add (new PlayerOption(playerOneText,playerOneDropdown));
+		listOfDrops.Add (new PlayerOption(playerTwoText,playerTwoDropdown));
 
 		//Restoring the player's preferences if they exist.
 		// These will return 0 if they are non-existent which is fine because that is keyboard.
@@ -73,11 +89,16 @@ public class OptionsManager : MonoBehaviour {
 
 	public void changeNumberOfPlayers(){
 		int targetNumber = playerSelector.value;
-		for (int i = 0; i < targetNumber; i++) {
-			listOfDrops [i].Show ();
+		Debug.Log (targetNumber);
+		for (int i = 0; i <= targetNumber; i++) {
+			listOfDrops [i].playerText.SetActive(true);
+			listOfDrops [i].playerDropdown.gameObject.SetActive(true);
+
 		}
-		for (int i = targetNumber; i < listOfDrops.Count; i++) {
-			listOfDrops [i].Hide ();
+		for (int i = targetNumber+1; i < listOfDrops.Count; i++) {
+			Debug.Log (i);
+			listOfDrops [i].playerText.SetActive(false);
+			listOfDrops [i].playerDropdown.gameObject.SetActive(false);
 		}
 	}
 
